@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ingestion-service
+          uri: lb://INGESTION-SERVICE
+          predicates:
+            - Path=/api/v1/logs/**
+        - id: query-service
+          uri: lb://QUERY-SERVICE
+          predicates:
+            - Path=/api/v1/queries/**
